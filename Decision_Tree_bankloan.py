@@ -19,7 +19,7 @@ y = file.iloc[:,0].values    #y = file.vlues[:,0]
 
 x_train, x_test, y_train, y_test = train_test_split(x,y,test_size=0.3)
 
-]o = DecisionTreeClassifier()
+o = DecisionTreeClassifier()
 ml = o.fit(x_train,y_train)
 print(ml)
 
