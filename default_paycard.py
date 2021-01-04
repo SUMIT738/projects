@@ -22,7 +22,7 @@ print(c)
 
 print(a.head())
 
-plt.scatter(a['PAY_AMT1'],a['MARRIAGE'])
+sns.scatterplot(a['PAY_AMT1'],a['MARRIAGE'])
 plt.show()
 
 X = a[['PAY_AMT1','MARRIAGE']]
@@ -31,8 +31,6 @@ Y = a['BILL_AMT1']
 print(Y)
 
 
-x = np.array(X).reshape(-1,1)
-print(X)
 
 X_train, X_test, Y_train, Y_test = train_test_split(X,Y, test_size=0.3)
 
