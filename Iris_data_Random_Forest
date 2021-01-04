@@ -1,0 +1,57 @@
+import pandas as pd
+import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
+from sklearn.preprocessing import LabelEncoder
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import classification_report
+from sklearn.metrics import accuracy_score
+from sklearn.model_selection import train_test_split
+
+data =pd.read_csv(r'C:\Users\sumit kumar\Downloads\archive (1)\iris_data.csv')
+
+data.head()
+
+l=LabelEncoder()    #Label encoder is help full to convert the string into numerical data
+
+data['species'] = l.fit_transform(data['species'])
+
+data.head()
+
+data.tail()
+
+sns.scatterplot(data['species'],data['petal_width'])
+plt.show()
+
+sns.countplot(data['species'])
+
+sns.heatmap(data.isnull())
+
+data.isnull().sum()
+
+y=data['species']
+x=data.drop(['species'],axis=1)
+
+
+x.shape
+
+
+y.shape
+
+
+x_train, x_test, y_train, y_test =train_test_split(x,y,test_size=.3)
+
+a = RandomForestClassifier()
+a.fit(x_train,y_train)
+
+pr = a.predict(x_test)
+pr
+
+print(classification_report(y_test,pr))
+
+accuracy_score(y_test,pr)
+
+
+
+
+
