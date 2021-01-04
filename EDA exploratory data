@@ -1,0 +1,26 @@
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+## we have titanic_Data
+
+train = pd.read_csv('titanic_train.csv')
+
+train.head()
+
+# Exploratory Data Analysis
+## Missing Data
+
+#cheak the data for null values
+
+train.isnull()
+
+sns.heatmap(train.isnull(),yticklabels=False)
+
+sns.distplot(train['Age'].dropna())
+
+sns.countplot(x='SibSp',data=train)
+
+plt.figure(figsize=(12, 7))
