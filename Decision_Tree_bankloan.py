@@ -9,6 +9,10 @@ from sklearn import tree
 file = pd.read_csv(r'C:\Users\sumit kumar\Desktop\bank_loan.csv')
 #print(file)
 
+file.isnull().sum()
+
+file.head()
+
 x = file.iloc[:,1:5]          #x = file.values[:,1:5]   (alos do that)
 print(x.values)                    #extracting data column
 
