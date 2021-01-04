@@ -1,45 +1,83 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import seaborn as sns
+
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.tree import DecisionTreeClassifier
+from sklearn.linear_model import SGDClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import classification_report
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LogisticRegression 
+from sklearn.model_selection import RandomizedSearchCV
 from sklearn.metrics import accuracy_score
 
+data =pd.read_csv(r'C:\Users\sumit kumar\Downloads\archive\wine.csv')
 
-a = pd.read_csv("wine.csv")
-print(a)
+data.head()
 
-print(a.head())
+data.isnull().sum()
 
-x = a[['alcohol_prct']]
-print(x.value)
+#sns.barplot(x=data['quality'],y=data['pH'])
+#plt.show()
 
-y = a[['quality']]
-print(y)
+x = data[data.columns[:-1]]
+y = data['quality']
+sc = StandardScaler()
+x = sc.fit_transform(x)
 
-#x = np.array(x).reshape(-1,1)
-#print(x)
-
-tree = DecisionTreeClassifier()
-
-c = tree.fit(x,y)
-print(c)
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=.2, random_state=42)
 
 
-b = c.predict(x)
-print(b)
-print("acuracy is :",accuracy_score(y,b)*100)
+######## Decision tree
 
+o=DecisionTreeClassifier()
 
-alcohol= []
-for x in range(3):
-    z = int(input('enter alcohol :'))
-    alcohol.append(z)
+o.fit(x_train,y_train)
 
-alcohol = np.array(alcohol).reshape(-1,1)
+c= o.predict(x_test)
 
-print(c.predict(alcohol))
+classification_report(y_test,c)
 
+##### Random forest
+
+a=RandomForestClassifier()
+
+a.fit(x_train,y_train)
+
+b=a.predict(x_test)
+
+print(classification_report(y_test,b))
+
+s = SGDClassifier()
+s.fit(x_train, y_train)
+pre= s.predict(x_test)
+print(classification_report(y_test, pre))
+
+##########   LogisticRegrassion()
+
+log=LogisticRegression()
+
+log.fit(x_train,y_train)
+
+l=log.predict(x_test)
+
+print(classification_report(y_test,l))
+
+accuracy_score(y_test,l)
+
+## KneighborsClassifier
+
+k=KNeighborsClassifier()
+
+k.fit(x_train,y_train)
+
+kn=k.predict(x_test)
+
+print(accuracy_score(y_test,kn))
+
+print(classification_report(y_test,kn))
 
 
 
