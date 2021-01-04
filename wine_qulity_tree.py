@@ -5,7 +5,6 @@ import matplotlib.pyplot as plt
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.tree import DecisionTreeClassifier
-from sklearn.linear_model import SGDClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
 from sklearn.preprocessing import StandardScaler
@@ -50,10 +49,6 @@ b=a.predict(x_test)
 
 print(classification_report(y_test,b))
 
-s = SGDClassifier()
-s.fit(x_train, y_train)
-pre= s.predict(x_test)
-print(classification_report(y_test, pre))
 
 ##########   LogisticRegrassion()
 
